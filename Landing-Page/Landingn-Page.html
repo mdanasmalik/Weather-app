@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<title>AUSPIFY - Task 1</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+nav{display:flex;justify-content:space-between;align-items:center;padding:18px 6%;background:#fff;position:sticky;top:0;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
+.logo{font-weight:bold;font-size:22px;color:#0a43ff}
+nav ul{display:flex;list-style:none;gap:30px}
+nav ul li a{text-decoration:none;color:#000;font-weight:500}
+.btn{background:#0a43ff;color:#fff;padding:10px 22px;border-radius:30px;text-decoration:none;display:inline-block;font-weight:bold}
+.main{display:flex;justify-content:space-between;align-items:center;padding:60px 6%;background:#f8f9ff}
+.left{width:50%}
+.left h1{font-size:48px;line-height:1.2;margin-bottom:15px}
+.left p{color:#555;margin-bottom:20px;line-height:1.5}
+.right{width:45%}
+.right img{width:100%;border-radius:20px}
+.box{display:flex;justify-content:space-between;gap:20px;padding:40px 6%;background:#fff}
+.box div{background:#f8f9ff;padding:20px;border-radius:12px;flex:1;text-align:center}
+.box div h3{margin-bottom:8px}
+.cat{text-align:center;padding:60px 6%;background:#0a43ff;color:#fff;margin-top:20px}
+footer{text-align:center;padding:15px;background:#000;color:#fff}
+
+
+.hamburger{display:none;font-size:28px;background:none;border:none;cursor:pointer;color:#000;margin-left:15px}
+.btn2{background:#fff;color:#0a43ff;border-radius: 30px; padding: 10px 22px;text-decoration: none;font-weight: bold;display: inline-block;}
+
+@media(max-width:768px){
+  .main{flex-direction:column;text-align:center}
+  .left,.right{width:100%}
+  .right{margin-top:30px}
+  .box{flex-direction:column-reverse;padding:30px 6%}
+  nav ul{display:none !important;flex-direction:column;position:absolute;top:65px;left:0;width:100%;background:#fff;padding:20px 6%;box-shadow:0 10px 20px rgba(0,0,0,0.1);gap:15px}
+  nav ul.show{display:flex !important}
+  .hamburger{display:block}
+}
+</style>
+</head>
+<body>
+<nav>
+<div class="logo">AUSPIFY</div>
+<ul id="navLinks">
+<li><a href="#">Home</a></li>
+<li><a href="#">Services</a></li>
+<li><a href="#">Tasks</a></li>
+<li><a href="#">Contact</a></li>
+</ul>
+<a href="#" class="btn">Get Started</a>
+<button class="hamburger" id="menuBtn"><i class="fa-solid fa-bars"></i></button>
+</nav>
+<section class="main">
+<div class="left">
+<h1>Bring Future <br> Throough Tech</h1>
+<p>Auspify Technologies provides modern frontend solutions this landing page is built as per Task 1 -HTML, CSS & Responsive Design</p>
+<a href="#" class="btn">Explore our Work</a>
+</div>
+<div class="right">
+<img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=600" alt="Tech Image">
+</div>
+</section>
+<section class="box">
+<div><h3>✓ Responsive Layout</h3><p>Works on mobile, tablet & desktop</p></div>
+<div><h3>✓ Navigation Bar</h3><p>Sticky header with CTA</p></div>
+<div><h3>✓ Hero Section</h3><p>Clear message with image</p></div>
+<div><h3>✓ Mobile-Friendly</h3><p>Optimized with media queries</p></div>
+</section>
+<div class="cat">
+<h2>Ready to Build Future With Us?</h2>
+<p style="margin:15px 0 25px">This project is submitted for Frontend Developer Internship - Task 1</p>
+<a href="#" class="btn2">Contact Now</a>
+</div>
+<footer> 2025 AUSPIFY Technologies | Designed for Internship Task 1</footer>
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const navLinks = document.getElementById("navLinks");
+  menuBtn.addEventListener("click",function(){
+    navLinks.classList.toggle("show");
+  });
+</script>
+</body>
+</html>

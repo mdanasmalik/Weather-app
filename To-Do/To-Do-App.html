@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dynamic To-Do Application</title>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+  body { background: #f0f2f5; display: flex; justify-content: center; padding: 30px 15px; }
+  .container { background: white; width: 100%; max-width: 500px; padding: 25px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);position: absolute; }
+  h1 { text-align: center; color: #333; margin-bottom: 5px; }
+  p { text-align: center; color: #777; margin-bottom: 20px; font-size: 14px; }
+  .input-box { display: flex; gap: 10px; margin-bottom: 20px; }
+  input { flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 8px; outline: none; font-size: 15px; }
+  input:focus { border-color: #4a90e2; }
+  button { cursor: pointer; border: none; border-radius: 8px; }
+  .add-btn { background: #4a90e2; color: white; padding: 12px 18px; font-weight: bold; }
+  .add-btn:hover { background: #357abd; }
+  ul { list-style: none; }
+  li { display: flex; align-items: center; gap: 10px; background: #f9f9f9; padding: 12px; border-radius: 8px; margin-bottom: 10px; }
+  li.completed span { text-decoration: line-through; color: #999; }
+  li span { flex: 1; font-size: 15px; cursor: pointer; }
+  .delete-btn { background: #ff4d4d; color: white; padding: 6px 10px; font-size: 13px; }
+  .delete-btn:hover { background: #e60000; }
+  .clear-btn { width: 100%; background: #eee; padding: 10px; margin-top: 10px; font-weight: bold; }
+  #count { text-align: center; margin-top: 12px; color: #555; font-size: 14px; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>My To-Do List</h1>
+  <p>Task 3 - Dynamic To-Do Application</p>
+
+  <div class="input-box">
+    <input type="text" id="taskInput" placeholder="Naya task likho...">
+    <button class="add-btn" onclick="addTask()">Add</button>
+  </div>
+
+  <ul id="taskList"></ul>
+
+  <p id="count"></p>
+  <button class="clear-btn" onclick="clearAll()">Clear All</button>
+</div>
+
+<script>
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+  function saveTasks() {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }
+
+  function renderTasks() {
+    const list = document.getElementById("taskList");
+    list.innerHTML = "";
+    tasks.forEach((task, index) => {
+      const li = document.createElement("li");
+      if (task.completed) li.classList.add("completed");
+      li.innerHTML = `<input type="checkbox" ${task.completed ? "checked" : ""} onclick="toggleTask(${index})">
+                      <span onclick="toggleTask(${index})">${task.text}</span>
+                      <button class="delete-btn" onclick="deleteTask(${index})">Delete</button>`;
+      list.appendChild(li);
+    });
+    const done = tasks.filter(t => t.completed).length;
+    document.getElementById("count").innerText = `Total: ${tasks.length} | Completed: ${done} | Pending: ${tasks.length - done}`;
+  }
+
+  function addTask() {
+    const input = document.getElementById("taskInput");
+    const text = input.value.trim();
+    if (text === "") { alert("Please task likho!"); return; }
+    tasks.push({ text: text, completed: false });
+    saveTasks();
+    renderTasks();
+    input.value = "";
+  }
+
+  function toggleTask(index) {
+    tasks[index].completed = !tasks[index].completed;
+    saveTasks();
+    renderTasks();
+  }
+
+  function deleteTask(index) {
+    tasks.splice(index, 1);
+    saveTasks();
+    renderTasks();
+  }
+
+  function clearAll() {
+    tasks = [];
+    saveTasks();
+    renderTasks();
+  }
+
+  document.getElementById("taskInput").addEventListener("keypress", function(e) {
+    if (e.key === "Enter") addTask();
+  });
+
+  renderTasks();
+</script>
+
+</body>
+</html>
